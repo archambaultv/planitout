@@ -1,0 +1,94 @@
+author: Vincent Archambault
+
+lesson_info:
+  lesson_title: Révision des fonctions exponentielles et des logarithmes
+  lesson_number: 11
+  course: Calcul différentiel
+  date: 2024-11-06
+  start_time: "15:30"
+  end_time: "16:45"
+  location: Le meilleur cégep
+  objectives:
+    - Réviser les notions du secondaire sur les exponentielles et les logarithmes.
+    - Appliquer les propriétés des exponentielles et des logarithmes pour résoudre ou simplifier des équations.
+  materials: Ordinateur, projecteur et tableau.
+  competencies:
+    - Analyser des problèmes par l’application du calcul différentiel.
+  performance_criteria: 
+    - Utilisation pertinente du langage et des concepts dans l’application du calcul différentiel.
+
+lesson_intro:
+  duration: PT8M
+  lesson_objective: null  # Généré automatiquement
+  lesson_plan: null  # Généré automatiquement
+  priming: Plier une feuille de papier 42 fois pour atteindre la Lune.
+  prior_knowledge_activation: null
+
+lesson_activities:
+  - title: Fonctions transcendantes
+    duration: PT2M
+    objective: Nommer des fonctions transcendantes et leurs applications.
+    teaching_activity:  Mentionner qu'il y a d'autres fonctions que les fonctions polynomiales. Notamment pour ce cours les fonctions
+        exponentielles, les fonctions logarithmiques et les fonctions trigonométriques.
+    learning_activity: |
+      Nommer des applications de fonctions transcendantes. Exemples: 
+      \begin{itemize}
+      \item croissance d'une population
+      \item décroissance d'une substance radioactive
+      \item taux de croissance d'un investissement.
+      \end{itemize}
+
+  - title: "Exponentielles : définitions et propriétés"
+    duration: PT20M
+    objective: Résoudre et simplifier des équations exponentielles.
+    teaching_activity: |
+      Expliquer l'exponentielle comme une multiplication répétée.
+      \begin{itemize}
+      \item Nommer les différentes parties: base, exposant. Base $a > 0$ et $a \neq 1$.
+      \item Dériver les propriétés des exponentielles comme une multiplication répétée.
+      \item Exemple 1 section 3.2.
+      \end{itemize}
+    learning_activity: 
+      - Testez votre compréhension section 3.2.
+
+  - title: "Exponentielles : graphe"
+    duration: PT10M
+    objective: Tracer et décrire le graphique d'une fonction exponentielle.
+    teaching_activity: |
+      Nommer les propriétés du graphique d'une fonction exponentielle: 
+      \begin{itemize}
+      \item passe par $(0,1)$.
+      \item strictement croissante si $a > 1$ et strictement décroissante si $0 < a < 1$.
+      \item Le domaine est $(-\infty, \infty)$ et l'image est $(0, \infty)$.
+      \end{itemize}
+    learning_activity: 
+      - Répondre aux questions de l'enseignant
+
+
+  - title: "Logarithmes : définition et propriétés"
+    duration: PT20M
+    objective: Résoudre et simplifier des équations logarithmiques.
+    teaching_activity: 
+      - Expliquer que le logarithme est l'inverse de l'exponentielle.
+      - Définir le logarithme en tant que fonction.
+      - Propriétés des logarithmes.
+    learning_activity: 
+      - Testez votre compréhension section 3.2.
+
+  - title: "Logarithmes : graphe"
+    duration: PT10M
+    objective: Tracer et décrire le graphique d'une fonction logarithmique.
+    teaching_activity: |
+      Nommer les propriétés du graphique d'une fonction logarithmique:
+      \begin{itemize}
+      \item passe par $(1,0)$.
+      \item strictement croissante si $a > 1$ et strictement décroissante si $0 < a < 1$.
+      \item Le domaine est $(0, \infty)$ et l'image est $(-\infty, \infty)$.
+      \end{itemize}
+    learning_activity: 
+      - Répondre aux questions de l'enseignant
+
+lesson_closure:
+  duration: PT5M
+  summary: null  # Généré automatiquement
+  for_next_time: Chapitre 3.14, exercices 2.718
