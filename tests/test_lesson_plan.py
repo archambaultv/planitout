@@ -1,5 +1,7 @@
-from planitout.lesson_plan import generate_latex_content, LessonPlan, compile_latex
+from planitout.lesson_plan import create_null_dict, generate_latex_content, LessonPlan, \
+     compile_latex
 from pathlib import Path
+from yaml import safe_dump
 
 
 def test_read_yaml(lesson_plan_yaml_file: str):
@@ -27,3 +29,15 @@ def test_compile_latex(lesson_plan_yaml_file: str, lesson_plan_tex_file: str,
     compile_latex(f"{tmpdir}/tmp.tex")
     # Check if the PDF file has been generated
     assert Path(f"{tmpdir}/tmp.pdf").exists()
+
+
+def test_skeleton_yaml(lesson_plan_yaml_file: str):
+    skeleton = create_null_dict(LessonPlan)
+    yaml_file = LessonPlan.from_yaml(lesson_plan_yaml_file)
+
+    # Write skeleton dict to file
+    with open("skeleton.yaml", "w") as f:
+        f.write(safe_dump(skeleton, sort_keys=False))
+
+    for key in yaml_file.model_dump().keys():
+        assert key in skeleton

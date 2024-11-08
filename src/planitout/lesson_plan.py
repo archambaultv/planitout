@@ -2,9 +2,9 @@ import yaml
 from datetime import date as date_type, time, timedelta, datetime
 from pydantic import BaseModel, field_validator
 import locale
-import argparse
-import subprocess  # Add this import
+import subprocess
 import os
+from typing import Type, get_origin
 
 ###############################################################################
 # Pydantic models for the lesson plan
@@ -325,37 +325,16 @@ def compile_latex(lesson_tex: str) -> None:
                    check=True)
 
 
-def main() -> None:
-    args = parse_args()
+def create_null_dict(model_class: Type[BaseModel]) -> dict:
+    null_dict = {}
+    for field_name, field_info in model_class.model_fields.items():
+        field_type = field_info.annotation
 
-    lesson_yaml = args.lesson_yaml
-    lesson_tex = args.output if args.output else lesson_yaml.replace('.yaml', '.tex')
-    opt = LatexOptions(one_page_per_activity=args.single_page)
+        # Check if the field is a Pydantic model
+        if issubclass(get_origin(field_type) or field_type, BaseModel):
+            # Recursively call create_null_dict for nested Pydantic models
+            null_dict[field_name] = create_null_dict(field_type)
+        else:
+            null_dict[field_name] = None
 
-    lesson_plan = LessonPlan.from_yaml(lesson_yaml)
-    latex_content = generate_latex_content(lesson_plan, opt=opt)
-
-    with open(lesson_tex, 'w', encoding='utf-8') as file:
-        file.write(latex_content)
-
-    if args.compile:
-        compile_latex(lesson_tex)
-
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Générer un plan de leçon LaTeX à partir d\'un fichier YAML.')
-    parser.add_argument('lesson_yaml', type=str, help='Chemin vers le fichier YAML de la leçon')
-    parser.add_argument('-o', '--output', type=str, help='Chemin vers le fichier LaTeX de sortie',
-                        default=None)
-    parser.add_argument('-s', '--single-page', action='store_true',
-                        help='Générer une page par activité', default=True)
-    parser.add_argument('-c', '--compile', action='store_true',
-                        help='Compiler directement le fichier .tex avec LuaLaTeX',
-                        default=False)
-    args = parser.parse_args()
-    return args
-
-
-if __name__ == '__main__':
-    main()
+    return null_dict
