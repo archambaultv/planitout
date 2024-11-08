@@ -1,7 +1,6 @@
 from planitout.lesson_plan import create_null_dict, generate_latex_content, LessonPlan, \
      compile_latex
 from pathlib import Path
-from yaml import safe_dump
 
 
 def test_read_yaml(lesson_plan_yaml_file: str):
@@ -33,11 +32,12 @@ def test_compile_latex(lesson_plan_yaml_file: str, lesson_plan_tex_file: str,
 
 def test_skeleton_yaml(lesson_plan_yaml_file: str):
     skeleton = create_null_dict(LessonPlan)
-    yaml_file = LessonPlan.from_yaml(lesson_plan_yaml_file)
+    yaml_file = LessonPlan.from_yaml(lesson_plan_yaml_file).model_dump()
 
-    # Write skeleton dict to file
-    with open("skeleton.yaml", "w") as f:
-        f.write(safe_dump(skeleton, sort_keys=False))
-
-    for key in yaml_file.model_dump().keys():
-        assert key in skeleton
+    # Assert both dict have the same keys at each level
+    def compare_keys(dict1: dict, dict2: dict):
+        assert sorted(dict1.keys()) == sorted(dict2.keys())
+        for key in dict1.keys():
+            if isinstance(dict1[key], dict):
+                compare_keys(dict1[key], dict2[key])
+    compare_keys(skeleton, yaml_file)

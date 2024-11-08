@@ -330,9 +330,14 @@ def create_null_dict(model_class: Type[BaseModel]) -> dict:
     for field_name, field_info in model_class.model_fields.items():
         field_type = field_info.annotation
 
-        # Check if the field is a Pydantic model
-        if issubclass(get_origin(field_type) or field_type, BaseModel):
-            # Recursively call create_null_dict for nested Pydantic models
+        # Handle lists of BaseModel
+        if get_origin(field_type) == list:
+            item_type = field_type.__args__[0]
+            if issubclass(get_origin(item_type) or item_type, BaseModel):
+                null_dict[field_name] = [create_null_dict(item_type)]
+            else:
+                null_dict[field_name] = []
+        elif issubclass(get_origin(field_type) or field_type, BaseModel):
             null_dict[field_name] = create_null_dict(field_type)
         else:
             null_dict[field_name] = None
