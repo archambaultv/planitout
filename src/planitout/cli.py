@@ -1,7 +1,7 @@
 import argparse
 import yaml
 from planitout.lesson_plan import LatexOptions, LessonPlan, compile_latex, \
-    generate_latex_content, create_null_dict
+    generate_latex_content
 
 
 def main() -> None:
@@ -57,7 +57,7 @@ def parse_args():
 
 def write_skeleton_yaml(args) -> None:
     # Create a skeleton from the lesson plan Pydantic model
-    lesson_plan = create_null_dict(LessonPlan)
+    lesson_plan = LessonPlan.to_empty_dict()
 
     with open(args.file_name, 'w', encoding='utf-8') as file:
         yaml.dump(lesson_plan, file, allow_unicode=True, sort_keys=False)
