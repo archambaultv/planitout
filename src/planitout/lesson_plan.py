@@ -120,7 +120,7 @@ class LessonActivity(BaseModel):
 class LessonIntro(BaseModel):
     duration: timedelta
     priming: str | None = None
-    prior_knowledge_activation: str | None = None
+    prior_knowledge_activation: str | list[str] | None = None
 
     @classmethod
     def from_dict(cls, data: dict) -> 'LessonIntro':
@@ -268,9 +268,9 @@ def lesson_info_to_dict(x: LessonInfo) -> dict:
     if x.learning_objectives:
         d['\\faBullseye{} Objectifs'] = x.learning_objectives
     if x.curriculum_competencies:
-        d['\\faToolbox{} Compétences'] = x.curriculum_competencies
+        d['\\faToolbox{} Compétences du devis'] = x.curriculum_competencies
     if x.curriculum_performance_criteria:
-        d['\\faUserCheck{} Critères de performance'] = x.curriculum_performance_criteria
+        d['\\faUserCheck{} Critères de performance du devis'] = x.curriculum_performance_criteria
     if x.materials:
         d['\\faTv{} Matériel nécessaire'] = x.materials
     return d

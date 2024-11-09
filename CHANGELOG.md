@@ -6,6 +6,10 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 Ce projet utilise [Semantic Versioning](https://semver.org/spec/v2.0.0.html) avec
 l'exception que les versions 0.*.* peuvent avoir des changements incompatibles dans les versions mineures.
 
+## [0.2.1] - 2024-11-09
+### Modifier
+- Activation des connaissances antérieures accepte maintenant également une liste
+
 ## [0.2.0] - 2024-11-09
 ### Modifié
 - Le format du fichier YAML est maintenant en français
