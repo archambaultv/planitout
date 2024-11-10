@@ -266,7 +266,7 @@ def lesson_info_to_dict(x: LessonInfo) -> dict:
     if x.location:
         d['\\faLandmark{} Lieu'] = x.location
     if x.learning_objectives:
-        d['\\faBullseye{} Objectifs'] = x.learning_objectives
+        d['\\faBullseye{} Cible d\'apprentissage'] = x.learning_objectives
     if x.curriculum_competencies:
         d['\\faToolbox{} Compétences du devis'] = x.curriculum_competencies
     if x.curriculum_performance_criteria:

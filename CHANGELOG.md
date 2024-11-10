@@ -6,6 +6,10 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 Ce projet utilise [Semantic Versioning](https://semver.org/spec/v2.0.0.html) avec
 l'exception que les versions 0.*.* peuvent avoir des changements incompatibles dans les versions mineures.
 
+## [0.2.2] - 2024-11-09
+### Modifier
+- Objectifs renommés Cible d'apprentissage dans les informations de la leçon
+  
 ## [0.2.1] - 2024-11-09
 ### Modifier
 - Activation des connaissances antérieures accepte maintenant également une liste
