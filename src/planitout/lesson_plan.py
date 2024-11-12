@@ -317,7 +317,7 @@ def lesson_activity_to_dict(x: LessonActivity) -> dict:
 def dict_to_subsubsections(d: dict) -> str:
     tex = ''
     for key, value in d.items():
-        tex += f'\\subsubsection*{{{key}}}\n'
+        tex += f'\\mysubsubsection*{{{key}}}\n'
         if isinstance(value, list):
             if len(value) == 1:
                 tex += f'{value[0]}\n'
@@ -355,7 +355,8 @@ def generate_latex_content(lessonPlan: LessonPlan, opt: LatexOptions | None = No
 \setsansfont{{Source Sans 3}}
 \setmonofont{{Source Code Pro}}
 \setmathfont{{Latin Modern Math}}
-\setmainfont{{Source Sans 3}}
+\setmainfont{{Source Serif 4}}
+\newfontfamily\semiboldserif{{Source Serif 4}}[Weight=Semibold]
 \usepackage[french]{{babel}}
 \usepackage[letterpaper, margin=1in]{{geometry}}
 \usepackage{{amsmath}}
@@ -363,9 +364,23 @@ def generate_latex_content(lessonPlan: LessonPlan, opt: LatexOptions | None = No
 \usepackage{{xltabular}}
 \usepackage{{booktabs}}
 \usepackage{{fontawesome5}}
+\usepackage{{enumitem}}
+\setlist[description]{{%
+  font={{\normalfont\semiboldserif}},
+}}
 
-\title{{Plan de leçon\\ {lessonPlan.lesson_info.lesson_title}}}
-\author{{{lessonPlan.author}}}
+\usepackage{{suffix}}
+\newcommand\mysection[1]{{\section{{\sffamily #1}}}}
+\WithSuffix\newcommand\mysection*[1]{{\section*{{\sffamily  #1}}}}
+
+\newcommand\mysubsection[1]{{\subsection{{\sffamily #1}}}}
+\WithSuffix\newcommand\mysubsection*[1]{{\subsection*{{\sffamily  #1}}}}
+
+\newcommand\mysubsubsection[1]{{\subsubsection{{\sffamily #1}}}}
+\WithSuffix\newcommand\mysubsubsection*[1]{{\subsubsection*{{\sffamily  #1}}}}
+
+\title{{\sffamily Plan de leçon\\ {lessonPlan.lesson_info.lesson_title}}}
+\author{{\sffamily {lessonPlan.author}}}
 \date{{}}
 
 \begin{{document}}
@@ -375,7 +390,7 @@ def generate_latex_content(lessonPlan: LessonPlan, opt: LatexOptions | None = No
     info_dict = lesson_info_to_dict(lessonPlan.lesson_info)
     tex_lesson_info = ""
     if info_dict:
-        tex_lesson_info += '\\section*{Informations générales}\n'
+        tex_lesson_info += '\\mysection*{Informations générales}\n'
         tex_lesson_info += '\\begin{description}\n'
         for key, value in info_dict.items():
             if isinstance(value, list):
@@ -394,7 +409,7 @@ def generate_latex_content(lessonPlan: LessonPlan, opt: LatexOptions | None = No
 
     # Lesson summary
     s = duration_fmt(lessonPlan.total_duration())
-    tex_summary = f"{my_clearpage}\\section*{{Résumé de la leçon}}\n"
+    tex_summary = f"{my_clearpage}\\mysection*{{Résumé de la leçon}}\n"
     tex_summary += "\\begin{description}\n"
     tex_summary += f"\\item[Durée totale] {s}\n"
     tex_summary += "\\end{description}\n"
@@ -426,7 +441,7 @@ Conclusion &  & {duration_fmt(lessonPlan.lesson_closure.duration, short=True)} \
     # Lesson intro
     intro_dict = lesson_intro_to_dict(lessonPlan.lesson_intro, lessonPlan)
     time_fmt, the_time = duration_time_fmt(the_time, lessonPlan.lesson_intro.duration)
-    tex_intro = f'{my_clearpage}\\section{{Introduction}}\n'
+    tex_intro = f'{my_clearpage}\\mysection{{Introduction}}\n'
     tex_intro += f'\\noindent {time_fmt}\n'
     if intro_dict:
         tex_intro += dict_to_subsubsections(intro_dict)
@@ -436,7 +451,7 @@ Conclusion &  & {duration_fmt(lessonPlan.lesson_closure.duration, short=True)} \
     for activity in lessonPlan.lesson_activities:
         act_dict = lesson_activity_to_dict(activity)
         time_fmt, the_time = duration_time_fmt(the_time, activity.duration)
-        tex_act = f'{my_clearpage}\\section{{{activity.title}}}\n'
+        tex_act = f'{my_clearpage}\\mysection{{{activity.title}}}\n'
         tex_act += f'\\noindent {time_fmt}\n'
         if act_dict:
             tex_act += dict_to_subsubsections(act_dict)
@@ -446,7 +461,7 @@ Conclusion &  & {duration_fmt(lessonPlan.lesson_closure.duration, short=True)} \
     # Lesson closure
     closure_dict = lesson_closure_to_dict(lessonPlan.lesson_closure, lessonPlan)
     time_fmt, _ = duration_time_fmt(the_time, lessonPlan.lesson_closure.duration)
-    tex_closure = f'{my_clearpage}\\section{{Conclusion}}\n'
+    tex_closure = f'{my_clearpage}\\mysection{{Conclusion}}\n'
     tex_closure += f'\\noindent {time_fmt}\n'
     if closure_dict:
         tex_closure += dict_to_subsubsections(closure_dict)
