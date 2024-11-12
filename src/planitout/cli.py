@@ -2,6 +2,7 @@ import argparse
 import yaml
 from planitout.lesson_plan import LatexOptions, LessonPlan, compile_latex, \
     generate_latex_content
+from planitout.beamer import beamer_template
 
 
 def main() -> None:
@@ -12,6 +13,14 @@ def main() -> None:
 
     elif args.command == 'new':
         write_skeleton_yaml(args)
+
+    elif args.command == 'beamer':
+        write_beamer_template(args)
+
+
+def write_beamer_template(args) -> None:
+    with open(args.file_name, 'w', encoding='utf-8') as file:
+        file.write(beamer_template())
 
 
 def create_tex_plan(args):
@@ -51,6 +60,12 @@ def parse_args():
         'new', help='Créer un fichier YAML squelette pour un plan de leçon.')
     new_parser.add_argument('file_name',
                             type=str, help='Nom du fichier YAML à créer')
+
+    # Subcommand 'beamer'
+    beamer_parser = subparsers.add_parser(
+        'beamer', help='Créer un fichier LaTeX de base pour une présentation Beamer.')
+    beamer_parser.add_argument('file_name',
+                               type=str, help='Nom du fichier LaTeX à créer')
 
     return parser.parse_args()
 

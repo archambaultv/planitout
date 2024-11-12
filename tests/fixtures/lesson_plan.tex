@@ -7,7 +7,8 @@
 \setsansfont{Source Sans 3}
 \setmonofont{Source Code Pro}
 \setmathfont{Latin Modern Math}
-\setmainfont{Source Sans 3}
+\setmainfont{Source Serif 4}
+\newfontfamily\semiboldserif{Source Serif 4}[Weight=Semibold]
 \usepackage[french]{babel}
 \usepackage[letterpaper, margin=1in]{geometry}
 \usepackage{amsmath}
@@ -15,23 +16,37 @@
 \usepackage{xltabular}
 \usepackage{booktabs}
 \usepackage{fontawesome5}
+\usepackage{enumitem}
+\setlist[description]{%
+  font={\normalfont\semiboldserif},
+}
 
-\title{Plan de leçon\\ Révision des fonctions exponentielles et des logarithmes}
-\author{Vincent Archambault}
+\usepackage{suffix}
+\newcommand\mysection[1]{\section{\sffamily #1}}
+\WithSuffix\newcommand\mysection*[1]{\section*{\sffamily  #1}}
+
+\newcommand\mysubsection[1]{\subsection{\sffamily #1}}
+\WithSuffix\newcommand\mysubsection*[1]{\subsection*{\sffamily  #1}}
+
+\newcommand\mysubsubsection[1]{\subsubsection{\sffamily #1}}
+\WithSuffix\newcommand\mysubsubsection*[1]{\subsubsection*{\sffamily  #1}}
+
+\title{\sffamily Plan de leçon\\ Révision des fonctions exponentielles et des logarithmes}
+\author{\sffamily Vincent Archambault}
 \date{}
 
 \begin{document}
 
 \maketitle
 
-\section*{Informations générales}
+\mysection*{Informations générales}
 \begin{description}
 \item[\faBook{} Cours] Calcul différentiel
 \item[{\faHashtag} Numéro] 11
 \item[{\faCalendar*[regular]} Date] 6 novembre 2024
 \item[{\faClock[regular]} Heure] 15h30 - 16h45 (1 heure 15 minutes)
 \item[\faLandmark{} Lieu] Le meilleur cégep
-\item[\faBullseye{} Objectifs]
+\item[\faBullseye{} Cible d'apprentissage]
 \mbox{}\newline\leavevmode\vspace{-3ex}\begin{itemize}
     \item Réviser les notions du secondaire sur les exponentielles et les logarithmes.
     \item Appliquer les propriétés des exponentielles et des logarithmes pour résoudre ou simplifier des équations.
@@ -42,7 +57,7 @@
 \end{description}
 
 \clearpage
-\section*{Résumé de la leçon}
+\mysection*{Résumé de la leçon}
 \begin{description}
 \item[Durée totale] 1 heure 15 minutes
 \end{description}
@@ -66,14 +81,14 @@ Conclusion &  & 5 min \\
 \end{xltabular}
 
 \clearpage
-\section{Introduction}
+\mysection{Introduction}
 \noindent 8 minutes, début à 15h30 et fin à 15h38
-\subsubsection*{\faBullseye{} Objectifs de la leçon}
+\mysubsubsection*{\faBullseye{} Objectifs de la leçon}
 \begin{itemize}
     \item Réviser les notions du secondaire sur les exponentielles et les logarithmes.
     \item Appliquer les propriétés des exponentielles et des logarithmes pour résoudre ou simplifier des équations.
 \end{itemize}
-\subsubsection*{\faList{} Plan de la leçon}
+\mysubsubsection*{\faList{} Plan de la leçon}
 \begin{itemize}
     \item Fonctions transcendantes
     \item Exponentielles : définitions et propriétés
@@ -81,17 +96,17 @@ Conclusion &  & 5 min \\
     \item Logarithmes : définition et propriétés
     \item Logarithmes : graphe
 \end{itemize}
-\subsubsection*{\faSurprise[regular]{} Amorçage}
+\mysubsubsection*{\faSurprise[regular]{} Amorçage}
 Plier une feuille de papier 42 fois pour atteindre la Lune.
 
 \clearpage
-\section{Fonctions transcendantes}
+\mysection{Fonctions transcendantes}
 \noindent 2 minutes, début à 15h38 et fin à 15h40
-\subsubsection*{\faBullseye{} Objectif}
+\mysubsubsection*{\faBullseye{} Objectif}
 Nommer des fonctions transcendantes et leurs applications.
-\subsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
+\mysubsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
 Mentionner qu'il y a d'autres fonctions que les fonctions polynomiales. Notamment pour ce cours les fonctions exponentielles, les fonctions logarithmiques et les fonctions trigonométriques.
-\subsubsection*{\faCalculator{} Activité d'apprentissage}
+\mysubsubsection*{\faCalculator{} Activité d'apprentissage}
 Nommer des applications de fonctions transcendantes. Exemples: 
 \begin{itemize}
 \item croissance d'une population
@@ -102,11 +117,11 @@ Nommer des applications de fonctions transcendantes. Exemples:
 
 
 \clearpage
-\section{Exponentielles : définitions et propriétés}
+\mysection{Exponentielles : définitions et propriétés}
 \noindent 20 minutes, début à 15h40 et fin à 16h00
-\subsubsection*{\faBullseye{} Objectif}
+\mysubsubsection*{\faBullseye{} Objectif}
 Résoudre et simplifier des équations exponentielles.
-\subsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
+\mysubsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
 Expliquer l'exponentielle comme une multiplication répétée.
 \begin{itemize}
 \item Nommer les différentes parties: base, exposant. Base $a > 0$ et $a \neq 1$.
@@ -114,16 +129,16 @@ Expliquer l'exponentielle comme une multiplication répétée.
 \item Exemple 1 section 3.2.
 \end{itemize}
 
-\subsubsection*{\faCalculator{} Activité d'apprentissage}
+\mysubsubsection*{\faCalculator{} Activité d'apprentissage}
 Testez votre compréhension section 3.2.
 
 
 \clearpage
-\section{Exponentielles : graphe}
+\mysection{Exponentielles : graphe}
 \noindent 10 minutes, début à 16h00 et fin à 16h10
-\subsubsection*{\faBullseye{} Objectif}
+\mysubsubsection*{\faBullseye{} Objectif}
 Tracer et décrire le graphique d'une fonction exponentielle.
-\subsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
+\mysubsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
 Nommer les propriétés du graphique d'une fonction exponentielle: 
 \begin{itemize}
 \item passe par $(0,1)$.
@@ -131,31 +146,31 @@ Nommer les propriétés du graphique d'une fonction exponentielle:
 \item Le domaine est $(-\infty, \infty)$ et l'image est $(0, \infty)$.
 \end{itemize}
 
-\subsubsection*{\faCalculator{} Activité d'apprentissage}
+\mysubsubsection*{\faCalculator{} Activité d'apprentissage}
 Répondre aux questions de l'enseignant
 
 
 \clearpage
-\section{Logarithmes : définition et propriétés}
+\mysection{Logarithmes : définition et propriétés}
 \noindent 20 minutes, début à 16h10 et fin à 16h30
-\subsubsection*{\faBullseye{} Objectif}
+\mysubsubsection*{\faBullseye{} Objectif}
 Résoudre et simplifier des équations logarithmiques.
-\subsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
+\mysubsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
 \begin{itemize}
     \item Expliquer que le logarithme est l'inverse de l'exponentielle.
     \item Définir le logarithme en tant que fonction.
     \item Propriétés des logarithmes.
 \end{itemize}
-\subsubsection*{\faCalculator{} Activité d'apprentissage}
+\mysubsubsection*{\faCalculator{} Activité d'apprentissage}
 Testez votre compréhension section 3.2.
 
 
 \clearpage
-\section{Logarithmes : graphe}
+\mysection{Logarithmes : graphe}
 \noindent 10 minutes, début à 16h30 et fin à 16h40
-\subsubsection*{\faBullseye{} Objectif}
+\mysubsubsection*{\faBullseye{} Objectif}
 Tracer et décrire le graphique d'une fonction logarithmique.
-\subsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
+\mysubsubsection*{\faChalkboardTeacher{} Activité d'enseignement}
 Nommer les propriétés du graphique d'une fonction logarithmique:
 \begin{itemize}
 \item passe par $(1,0)$.
@@ -163,18 +178,18 @@ Nommer les propriétés du graphique d'une fonction logarithmique:
 \item Le domaine est $(0, \infty)$ et l'image est $(-\infty, \infty)$.
 \end{itemize}
 
-\subsubsection*{\faCalculator{} Activité d'apprentissage}
+\mysubsubsection*{\faCalculator{} Activité d'apprentissage}
 Répondre aux questions de l'enseignant
 
 \clearpage
-\section{Conclusion}
+\mysection{Conclusion}
 \noindent 5 minutes, début à 16h40 et fin à 16h45
-\subsubsection*{\faList{} Résumé de la leçon}
+\mysubsubsection*{\faList{} Résumé de la leçon}
 \begin{itemize}
     \item Réviser les notions du secondaire sur les exponentielles et les logarithmes.
     \item Appliquer les propriétés des exponentielles et des logarithmes pour résoudre ou simplifier des équations.
 \end{itemize}
-\subsubsection*{\faCalendar*[regular]{} Pour la prochaine fois}
+\mysubsubsection*{\faCalendar*[regular]{} Pour la prochaine fois}
 Chapitre 3.14, exercices 2.718
 
 \end{document}
