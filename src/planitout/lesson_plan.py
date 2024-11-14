@@ -240,13 +240,16 @@ def duration_fmt(duration: timedelta, short: bool = False) -> str:
     return f'{hours} {pluralize(hours, myhour)} {minutes} {pluralize(minutes, myminute)}'
 
 
-def duration_time_fmt(the_time: time | None, delta: timedelta) -> tuple[str, time | None]:
+def duration_time_fmt(the_time: time | timedelta, delta: timedelta) -> tuple[str, time | None]:
     str = f'{duration_fmt(delta)}'
-    if the_time is None:
-        return (str, None)
-    end_time = (datetime.combine(date_type.today(), the_time) + delta).time()
-    str = f'{str}, début à {the_time.strftime("%Hh%M")} et fin à {end_time.strftime("%Hh%M")}'
-    return str, end_time
+    if isinstance(the_time, timedelta):
+        end_time = the_time + delta
+        str = f'{str}, début à {duration_fmt(the_time)} et fin à {duration_fmt(end_time)}'
+        return (str, end_time)
+    else:
+        end_time = (datetime.combine(date_type.today(), the_time) + delta).time()
+        str = f'{str}, début à {the_time.strftime("%Hh%M")} et fin à {end_time.strftime("%Hh%M")}'
+        return str, end_time
 
 
 def lesson_info_to_dict(x: LessonInfo) -> dict:
@@ -342,6 +345,8 @@ def generate_latex_content(lessonPlan: LessonPlan, opt: LatexOptions | None = No
     # Set locale to French
     locale.setlocale(locale.LC_TIME, 'fr_CA.UTF-8')
     the_time = lessonPlan.lesson_info.start_time
+    if the_time is None:
+        the_time = timedelta()
     my_clearpage = '\\clearpage\n' if opt.one_page_per_activity else ''
 
     # Preamble
