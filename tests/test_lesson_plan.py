@@ -19,6 +19,17 @@ def test_generate_latex_content(lesson_plan_yaml_file: str, lesson_plan_tex_file
     assert latex_content == expected_content
 
 
+def test_generate_latex_content2(lesson_plan_yaml_file: str, lesson_plan_tex_file2: str):
+    lesson_plan = LessonPlan.from_yaml(lesson_plan_yaml_file)
+    lesson_plan.lesson_info.start_time = None
+    lesson_plan.lesson_info.end_time = None
+    latex_content = generate_latex_content(lesson_plan)
+    # Compare the generated LaTeX content with the expected content
+    with open(lesson_plan_tex_file2, "r") as f:
+        expected_content = f.read()
+    assert latex_content == expected_content
+
+
 def test_compile_latex(lesson_plan_yaml_file: str, lesson_plan_tex_file: str,
                        tmpdir: str):
     lesson_plan = LessonPlan.from_yaml(lesson_plan_yaml_file)
